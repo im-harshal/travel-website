@@ -1,0 +1,47 @@
+/* Header */
+header {
+  text-align: center;
+}
+/* Navbar CSS */
+.navbar {
+  background-color: rgb(245, 245, 245);
+}
+nav ul {
+  list-style-type: none;
+  display: flex;
+}
+nav ul li {
+  margin-right: 10px;
+}
+nav ul li a {
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  color: grey;
+}
+
+/* Main Content CSS */
+.main-div {
+  display: flex;
+}
+.sidebar {
+  display: flex;
+  width: 30%;
+  height: 300px;
+  margin: auto;
+  background-color: rgb(245, 245, 245);
+}
+
+.main-content {
+  display: flex;
+  width: 60%;
+  height: 300px;
+  margin: auto;
+  background-color: rgb(245, 245, 245);
+}
+
+/* Footer CSS */
+footer {
+  text-align: center;
+  color: grey;
+}
