@@ -1,14 +1,43 @@
+/*
+Color scheme
+Light Beige: #F5E6D3
+Warm Gray: #9A8C98
+Soft White: #FAF9F6
+Deep Taupe: #4A4E69
+Muted Teal (accent): #22577A
+*/
+
+/* Body */
+body {
+  margin: 0;
+  height: auto;
+}
 /* Header */
 header {
   text-align: center;
+  color: #22577a;
+}
+
+header h1 {
+  margin: 0;
+  padding: 5px 0;
+}
+
+header #datetime {
+  padding: 0;
+  margin: 0;
 }
 /* Navbar CSS */
 .navbar {
-  background-color: rgb(245, 245, 245);
+  background-color: #4a4e69;
+  height: 30px;
+  margin: 0;
 }
 nav ul {
+  padding-top: 5px;
   list-style-type: none;
   display: flex;
+  padding-left: 10px;
 }
 nav ul li {
   margin-right: 10px;
@@ -17,7 +46,7 @@ nav ul li a {
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
-  color: grey;
+  color: #faf9f6;
 }
 
 /* Main Content CSS */
@@ -26,22 +55,72 @@ nav ul li a {
 }
 .sidebar {
   display: flex;
-  width: 30%;
-  height: 300px;
+  width: 20%;
+  height: 1000px;
   margin: auto;
-  background-color: rgb(245, 245, 245);
+  background-color: #9a8c98;
 }
 
 .main-content {
   display: flex;
-  width: 60%;
-  height: 300px;
+  width: 80%;
+  height: 1000px;
   margin: auto;
-  background-color: rgb(245, 245, 245);
+  background-color: #faf9f6;
 }
 
 /* Footer CSS */
 footer {
   text-align: center;
-  color: grey;
+  align-items: center;
+  margin: auto;
+  height: 30px;
+  color: #22577a;
+}
+
+/* CSS related to various html pages */
+/* Contact Us page*/
+.contactForm {
+  font-size: large;
+  margin: 0;
+  width: 100%;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+.contactForm div {
+  margin: 10px;
+  padding: 0;
+  height: auto;
+}
+
+.contactForm div input,
+.contactForm div textarea {
+  margin: 0;
+  width: 300px;
+}
+
+.contactForm div input[type="radio"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+.contactForm div input[type="radio"],
+.contactForm div label[for="male"],
+.contactForm div label[for="female"] {
+  vertical-align: middle;
+}
+
+.contactForm div label {
+  display: inline-block;
+  width: 120px;
+  margin-right: 10px;
+}
+
+.contactForm button {
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
+  width: 100px;
+  height: 30px;
 }
