@@ -24,47 +24,117 @@
       </nav>
     </div>
     <div class="main-div">
-      <div class="sidebar"></div>
+      <div class="sidebar">
+        <div class="theme-controls">
+          <h2>Display Settings</h2>
+          <!-- Font Size Controls -->
+          <div class="control-group">
+            <label>Font Size: <span id="fontSizeDisplay">16</span>px</label>
+            <div class="font-size-controls">
+              <button class="btn" onclick="changeFontSize(-2)">-</button>
+              <input
+                type="range"
+                id="fontSizeSlider"
+                min="12"
+                max="24"
+                value="16"
+              />
+              <button class="btn" onclick="changeFontSize(2)">+</button>
+            </div>
+          </div>
+
+          <!-- Background Color Controls -->
+          <div class="control-group">
+            <label>Background Color</label>
+            <div class="color-options" id="colorOptions">
+              <!-- Color buttons will be added by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="main-content">
-        <form class="contactForm">
-          <div>
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" required />
-          </div>
-          <div>
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required />
-          </div>
-          <div>
-            <label for="phoneNumber">Phone Number:</label>
-            <input type="tel" id="phoneNumber" name="phoneNumber" required />
-          </div>
-          <div>
-            <label>Gender:</label>
-            <input type="radio" id="male" name="gender" value="male" required />
-            <label for="male">Male</label>
-            <input
-              type="radio"
-              id="female"
-              name="gender"
-              value="female"
-              required
-            />
-            <label for="female">Female</label>
-          </div>
-          <div>
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div>
-            <label for="comment">Comment:</label>
-            <textarea id="comment" name="comment" required></textarea>
-          </div>
-          <button type="submit">Submit</button>
-        </form>
+        <div class="form-container">
+          <h2 class="form-title">Contact Us</h2>
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="firstName">First Name:</label>
+              <input type="text" id="firstName" name="firstName" required />
+              <div id="firstNameError" class="error">
+                First name must start with a capital letter and contain only
+                letters
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input type="text" id="lastName" name="lastName" required />
+              <div id="lastNameError" class="error">
+                Last name must start with a capital letter and contain only
+                letters
+              </div>
+              <div id="sameNameError" class="error">
+                First name and last name cannot be the same
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number:</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="(123) 456-7890"
+                required
+              />
+              <div id="phoneError" class="error">
+                Phone number must be in format (123) 456-7890
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Gender:</label>
+              <div class="radio-group">
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="male"
+                  required
+                />
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female" />
+                <label for="female">Female</label>
+              </div>
+              <div id="genderError" class="error">Please select a gender</div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required />
+              <div id="emailError" class="error">
+                Please enter a valid email address
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="comment">Comment:</label>
+              <textarea
+                id="comment"
+                name="comment"
+                rows="4"
+                required
+              ></textarea>
+              <div id="commentError" class="error">
+                Comment must be at least 10 characters long
+              </div>
+            </div>
+
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
-    <footer>CS 6314 Web Programming Languages | Group1 | Copyright@2024</footer>
+    <footer>CS 6314 Web Programming Languages | Group1©2024</footer>
     <script src="script.js"></script>
   </body>
 </html>
