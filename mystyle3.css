@@ -1,0 +1,99 @@
+/* General Styling */
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  header {
+    text-align: center;
+    color: #4a4e69;
+  }
+  
+  .navbar {
+    background-color: #4a4e69;
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    padding-left: 10px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    padding: 10px;
+    color: #faf9f6;
+  }
+  
+  .main-div {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .sidebar {
+    width: 20%;
+    background-color: #9a8c98;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  
+  .theme-controls h2 {
+    color: #faf9f6;
+  }
+  
+  .main-content {
+    width: 80%;
+    padding: 20px;
+    background-color: #faf9f6;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #4a4e69;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #6a6e79;
+  }
+  .color-btn {
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #000; /* Ensure text is visible on light backgrounds */
+  }
+  
+  #errorMessage {
+    color: red;
+    font-size: 1rem;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #22577a;
+  }
+  
