@@ -1,60 +1,97 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TravelDeals - Find Your Perfect Trip</title>
-    <link rel="stylesheet" href="mystyle.css" />
-  </head>
-  <body>
-    <header>
-      <h1>TravelDeals - Find Your Perfect Trip</h1>
-      <span id="datetime"></span>
-    </header>
-    <div class="navbar">
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="stays.html">Stays</a></li>
-          <li><a href="flights.html">Flights</a></li>
-          <li><a href="cars.html">Cars</a></li>
-          <li><a href="cruises.html">Cruises</a></li>
-          <li><a href="contact-us.html">Contact Us</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="main-div">
-      <div class="sidebar">
-        <div class="theme-controls">
-          <h2>Display Settings</h2>
-          <!-- Font Size Controls -->
-          <div class="control-group">
-            <label>Font Size: <span id="fontSizeDisplay">16</span>px</label>
-            <div class="font-size-controls">
-              <button class="btn" onclick="changeFontSize(-2)">-</button>
-              <input
-                type="range"
-                id="fontSizeSlider"
-                min="12"
-                max="24"
-                value="16"
-              />
-              <button class="btn" onclick="changeFontSize(2)">+</button>
-            </div>
-          </div>
-
-          <!-- Background Color Controls -->
-          <div class="control-group">
-            <label>Background Color</label>
-            <div class="color-options" id="colorOptions">
-              <!-- Color buttons will be added by JavaScript -->
-            </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelDeals - Book Your Flight</title>
+  <link rel="stylesheet" href="mystyle2.css">
+</head>
+<body>
+  <header>
+    <h1>TravelDeals - Book Your Flight</h1>
+    <span id="datetime"></span>
+  </header>
+  <div class="navbar">
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="stays.html">Stays</a></li>
+        <li><a href="flights.html">Flights</a></li>
+        <li><a href="cars.html">Cars</a></li>
+        <li><a href="cruises.html">Cruises</a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="main-div">
+    <!-- Sidebar for Display Settings -->
+    <div class="sidebar">
+      <div class="theme-controls">
+        <h2>Display Settings</h2>
+        
+        <!-- Font Size Controls -->
+        <div class="control-group">
+          <label>Font Size: <span id="fontSizeDisplay">16</span>px</label>
+          <div class="font-size-controls">
+            <button class="btn" onclick="changeFontSize(-2)">-</button>
+            <input type="range" id="fontSizeSlider" min="12" max="24" value="16" />
+            <button class="btn" onclick="changeFontSize(2)">+</button>
           </div>
         </div>
+
+        <!-- Background Color Controls -->
+        <div class="control-group">
+          <label>Background Color</label>
+          <div class="color-options" id="colorOptions"></div>
+        </div>
       </div>
-      <div class="main-content"></div>
     </div>
-    <footer>CS 6314 Web Programming Languages | Group1©2024</footer>
-    <script src="script.js"></script>
-  </body>
+
+    <!-- Main Content for Flight Booking -->
+    <div class="main-content">
+      <h2>Book Your Flight</h2>
+      <form id="flightForm">
+        <!-- Trip Type Selection -->
+        <label>Trip Type:</label>
+        <input type="radio" name="tripType" value="one-way" id="oneWay"> One Way
+        <input type="radio" name="tripType" value="round-trip" id="roundTrip"> Round Trip
+
+        <!-- Origin and Destination -->
+        <label>Origin:</label>
+        <input type="text" id="origin" placeholder="Enter city in Texas or California">
+
+        <label>Destination:</label>
+        <input type="text" id="destination" placeholder="Enter city in Texas or California">
+
+        <!-- Departure and Return Date -->
+        <label>Departure Date:</label>
+        <input type="date" id="departureDate">
+
+        <div id="returnDateDiv" style="display: none;">
+          <label>Return Date:</label>
+          <input type="date" id="returnDate">
+        </div>
+
+        <!-- Passenger Selection -->
+        <div>
+          Select number of Passengers<span id="passengerIcon">👤</span>
+          <div id="passengerForm" style="display: none;">
+            <label>Adults:</label>
+            <input type="number" id="adults" min="1" max="4" value="1">
+            <label>Children:</label>
+            <input type="number" id="children" min="0" max="4" value="0">
+            <label>Infants:</label>
+            <input type="number" id="infants" min="0" max="4" value="0">
+          </div>
+        </div>
+
+        <!-- Search Button -->
+        <button type="button" onclick="validateAndSearch()">Search</button>
+      </form>
+      <div id="result"></div>
+    </div>
+  </div>
+  <footer>CS 6314 Web Programming Languages | Group1©2024</footer>
+  <script src="script2.js"></script>
+</body>
 </html>
