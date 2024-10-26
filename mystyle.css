@@ -74,7 +74,7 @@ nav ul li a {
 }
 .main-content {
   display: flex;
-  width: 100%;
+  width: 80%;
   height: 1200px;
   margin: auto;
   background-color: #faf9f6;
