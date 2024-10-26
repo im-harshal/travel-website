@@ -69,13 +69,20 @@ nav ul li a {
   margin: auto;
   background-color: #9a8c98;
 }
-
+.heading{
+  margin-left: 30px;
+}
 .main-content {
   display: flex;
   width: 80%;
   height: 1200px;
   margin: auto;
   background-color: #faf9f6;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.output {
+  margin-right: 50px;
 }
 
 /*----------------Footer CSS-------------------*/
