@@ -28,7 +28,7 @@ const colors = [
   { label: "Light Beige", value: "#F5E6D3" },
   { label: "Light Blue", value: "#D8E5F7" },
   { label: "Soft White", value: "#FAF9F6" },
-  { label: "Deep Taupe", value: "#E0F0E3" },
+  { label: "Light Green", value: "#E0F0E3" },
   { label: "Beige", value: "#f5f5dc" },
 ];
 
@@ -109,13 +109,12 @@ function submitCarForm() {
   const checkInDate = document.getElementById("checkInDate").value;
   const checkOutDate = document.getElementById("checkOutDate").value;
   const outputDiv = document.getElementById("output");
-  
+
   // Validate empty fields
   if (!city || !carType || !checkInDate || !checkOutDate) {
     alert("All fields are required.");
     return;
   }
-
 
   // Validate date range
   const startDate = new Date("2024-09-01");
@@ -123,7 +122,12 @@ function submitCarForm() {
   const checkIn = new Date(checkInDate);
   const checkOut = new Date(checkOutDate);
 
-  if (checkIn < startDate || checkIn > endDate || checkOut < startDate || checkOut > endDate) {
+  if (
+    checkIn < startDate ||
+    checkIn > endDate ||
+    checkOut < startDate ||
+    checkOut > endDate
+  ) {
     alert("Dates must be between September 1, 2024, and December 1, 2024.");
     return;
   }
@@ -155,7 +159,7 @@ function validateForm() {
 
   // Valid destinations
   const validDestinations = ["Alaska", "Bahamas", "Europe", "Mexico"];
-  
+
   // Date range for departing dates
   const minDate = new Date("2024-09-01");
   const maxDate = new Date("2024-12-01");
@@ -164,7 +168,9 @@ function validateForm() {
 
   // Validation checks
   if (!validDestinations.includes(destination)) {
-    alert("Destination must be one of the following: Alaska, Bahamas, Europe, or Mexico.");
+    alert(
+      "Destination must be one of the following: Alaska, Bahamas, Europe, or Mexico."
+    );
     return;
   }
   if (isNaN(minDuration) || minDuration < 3) {
@@ -179,8 +185,15 @@ function validateForm() {
     alert("Minimum duration cannot be greater than maximum duration.");
     return;
   }
-  if (startDate < minDate || startDate > maxDate || endDate < minDate || endDate > maxDate) {
-    alert("Departing dates must be between September 1, 2024, and December 1, 2024.");
+  if (
+    startDate < minDate ||
+    startDate > maxDate ||
+    endDate < minDate ||
+    endDate > maxDate
+  ) {
+    alert(
+      "Departing dates must be between September 1, 2024, and December 1, 2024."
+    );
     return;
   }
   if (startDate > endDate) {
@@ -188,7 +201,9 @@ function validateForm() {
     return;
   }
   if (guests > 2) {
-    alert("Number of guests per room cannot exceed 2, except for infants staying with adults.");
+    alert(
+      "Number of guests per room cannot exceed 2, except for infants staying with adults."
+    );
     return;
   }
 
@@ -199,9 +214,12 @@ function validateForm() {
     <p><strong>Departing Start Date:</strong> ${departingStartDate}</p>
     <p><strong>Departing End Date:</strong> ${departingEndDate}</p>
     <p><strong>Duration:</strong> ${minDuration} - ${maxDuration} days</p>
-    <p><strong>Guests:</strong> ${guests} ${guests > 2 ? '(with infants)' : ''}</p>
+    <p><strong>Guests:</strong> ${guests} ${
+    guests > 2 ? "(with infants)" : ""
+  }</p>
   `);
 }
+
 /**
  * Contact Form specific functionality
  */
@@ -306,9 +324,382 @@ function initContactForm() {
   });
 }
 
+function initStaysForm() {
+  const staysForm = document.getElementById("staysForm");
+  if (!staysForm) return;
+
+  // Valid cities in Texas and California
+  const validCities = [
+    // Texas cities
+    "austin",
+    "houston",
+    "dallas",
+    "san antonio",
+    "fort worth",
+    // California cities
+    "los angeles",
+    "san francisco",
+    "san diego",
+    "sacramento",
+    "san jose",
+  ];
+
+  // Date range constraints
+  const minDate = new Date("2024-09-01");
+  const maxDate = new Date("2024-12-01");
+
+  function calculateRequiredRooms(adults, children) {
+    // Calculate rooms needed based on max 2 people per room (excluding infants)
+    const totalGuests = adults + children;
+    return Math.ceil(totalGuests / 2);
+  }
+
+  function validateDate(date) {
+    const selectedDate = new Date(date);
+    return selectedDate >= minDate && selectedDate <= maxDate;
+  }
+
+  staysForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Reset error messages
+    document.querySelectorAll(".error").forEach((error) => {
+      error.classList.remove("error-visible");
+    });
+
+    let isValid = true;
+
+    // Get form values
+    const city = document.getElementById("city").value.toLowerCase().trim();
+    const checkIn = document.getElementById("checkIn").value;
+    const checkOut = document.getElementById("checkOut").value;
+    const adults = parseInt(document.getElementById("adults").value) || 0;
+    const children = parseInt(document.getElementById("children").value) || 0;
+    const infants = parseInt(document.getElementById("infants").value) || 0;
+
+    // City validation
+    if (!validCities.includes(city)) {
+      document.getElementById("cityError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    // Date validation
+    if (!validateDate(checkIn)) {
+      document.getElementById("checkInError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    if (!validateDate(checkOut)) {
+      document.getElementById("checkOutError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+
+    if (checkOutDate <= checkInDate) {
+      document.getElementById("checkOutError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    // Guest validation
+    if (adults < 1 || adults > 2) {
+      document.getElementById("adultsError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    if (children > 2) {
+      document.getElementById("childrenError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    if (infants < 0) {
+      document.getElementById("infantsError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    if (isValid) {
+      // Calculate required rooms
+      const requiredRooms = calculateRequiredRooms(adults, children);
+
+      // Display booking details
+      const bookingDetails = document.getElementById("bookingDetails");
+      bookingDetails.innerHTML = `
+        <h3>Booking Details:</h3>
+        <p><strong>City:</strong> ${
+          city.charAt(0).toUpperCase() + city.slice(1)
+        }</p>
+        <p><strong>Check-in Date:</strong> ${checkIn}</p>
+        <p><strong>Check-out Date:</strong> ${checkOut}</p>
+        <p><strong>Number of Guests:</strong></p>
+        <ul>
+          <li>Adults: ${adults}</li>
+          <li>Children: ${children}</li>
+          <li>Infants: ${infants}</li>
+        </ul>
+        <div class="rooms-info">
+          <p><strong>Required Rooms:</strong> ${requiredRooms}</p>
+        </div>
+      `;
+      bookingDetails.classList.add("visible");
+    }
+  });
+
+  // Add input event listeners for real-time validation
+  document.getElementById("city").addEventListener("input", function (e) {
+    const cityError = document.getElementById("cityError");
+    if (validCities.includes(e.target.value.toLowerCase().trim())) {
+      cityError.classList.remove("error-visible");
+    }
+  });
+
+  document.getElementById("checkIn").addEventListener("change", function (e) {
+    const checkInError = document.getElementById("checkInError");
+    if (validateDate(e.target.value)) {
+      checkInError.classList.remove("error-visible");
+    }
+  });
+
+  document.getElementById("checkOut").addEventListener("change", function (e) {
+    const checkOutError = document.getElementById("checkOutError");
+    if (validateDate(e.target.value)) {
+      checkOutError.classList.remove("error-visible");
+    }
+  });
+}
+
+function initFlightForm() {
+  const flightForm = document.getElementById("flightForm");
+  if (!flightForm) return;
+
+  // Valid cities in Texas and California
+  const validCities = [
+    // Texas cities
+    "austin",
+    "houston",
+    "dallas",
+    "san antonio",
+    "fort worth",
+    // California cities
+    "los angeles",
+    "san francisco",
+    "san diego",
+    "sacramento",
+    "san jose",
+  ];
+
+  // Date range constraints
+  const minDate = new Date("2024-09-01");
+  const maxDate = new Date("2024-12-01");
+
+  // Trip type handling
+  const tripTypeInputs = document.querySelectorAll('input[name="tripType"]');
+  const returnDateGroup = document.querySelector(".return-date-group");
+
+  tripTypeInputs.forEach((input) => {
+    input.addEventListener("change", function () {
+      returnDateGroup.style.display =
+        this.value === "roundTrip" ? "block" : "none";
+    });
+  });
+
+  // Passengers popup handling
+  const passengersLabel = document.querySelector(".passengers-label");
+  const passengersPopup = document.querySelector(".passengers-popup");
+  let isPassengersPopupOpen = false;
+
+  passengersLabel.addEventListener("click", function (e) {
+    e.preventDefault();
+    isPassengersPopupOpen = !isPassengersPopupOpen;
+    passengersPopup.style.display = isPassengersPopupOpen ? "block" : "none";
+  });
+
+  // Close passengers popup when clicking outside
+  document.addEventListener("click", function (e) {
+    if (
+      !passengersLabel.contains(e.target) &&
+      !passengersPopup.contains(e.target)
+    ) {
+      isPassengersPopupOpen = false;
+      passengersPopup.style.display = "none";
+    }
+  });
+
+  function validateDate(date) {
+    const selectedDate = new Date(date);
+    return selectedDate >= minDate && selectedDate <= maxDate;
+  }
+
+  function validateCity(city) {
+    return validCities.includes(city.toLowerCase().trim());
+  }
+
+  flightForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Reset error messages
+    document.querySelectorAll(".error").forEach((error) => {
+      error.classList.remove("error-visible");
+    });
+
+    let isValid = true;
+
+    // Get form values
+    const origin = document.getElementById("origin").value;
+    const destination = document.getElementById("destination").value;
+    const departDate = document.getElementById("departDate").value;
+    const returnDate = document.getElementById("returnDate").value;
+    const tripType = document.querySelector(
+      'input[name="tripType"]:checked'
+    ).value;
+    const adults = parseInt(document.getElementById("adults").value) || 0;
+    const children = parseInt(document.getElementById("children").value) || 0;
+    const infants = parseInt(document.getElementById("infants").value) || 0;
+
+    // Validate origin
+    if (!validateCity(origin)) {
+      document.getElementById("originError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    // Validate destination
+    if (!validateCity(destination)) {
+      document
+        .getElementById("destinationError")
+        .classList.add("error-visible");
+      isValid = false;
+    }
+
+    // Validate same city
+    if (origin.toLowerCase().trim() === destination.toLowerCase().trim()) {
+      document.getElementById("destinationError").textContent =
+        "Origin and destination cannot be the same / Please select a city in Texas or California";
+      document
+        .getElementById("destinationError")
+        .classList.add("error-visible");
+      isValid = false;
+    }
+
+    // Validate departure date
+    if (!validateDate(departDate)) {
+      document.getElementById("departDateError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    // Validate return date for round trips
+    if (tripType === "roundTrip") {
+      if (!validateDate(returnDate)) {
+        document
+          .getElementById("returnDateError")
+          .classList.add("error-visible");
+        isValid = false;
+      }
+
+      const departDateTime = new Date(departDate);
+      const returnDateTime = new Date(returnDate);
+      if (returnDateTime <= departDateTime) {
+        document.getElementById("returnDateError").textContent =
+          "Return date must be after departure date";
+        document
+          .getElementById("returnDateError")
+          .classList.add("error-visible");
+        isValid = false;
+      }
+    }
+
+    // Validate passenger counts
+    if (adults < 1 || adults > 4) {
+      document.getElementById("adultsError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    if (children > 4) {
+      document.getElementById("childrenError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    if (infants > 4) {
+      document.getElementById("infantsError").classList.add("error-visible");
+      isValid = false;
+    }
+
+    if (isValid) {
+      // Display booking details
+      const bookingDetails = document.getElementById("bookingDetails");
+      let detailsHTML = `
+        <h3>Flight Booking Details:</h3>
+        <p><strong>Trip Type:</strong> ${
+          tripType === "oneWay" ? "One Way" : "Round Trip"
+        }</p>
+        <p><strong>Origin:</strong> ${
+          origin.charAt(0).toUpperCase() + origin.slice(1)
+        }</p>
+        <p><strong>Destination:</strong> ${
+          destination.charAt(0).toUpperCase() + destination.slice(1)
+        }</p>
+        <p><strong>Departure Date:</strong> ${departDate}</p>
+      `;
+
+      if (tripType === "roundTrip") {
+        detailsHTML += `<p><strong>Return Date:</strong> ${returnDate}</p>`;
+      }
+
+      detailsHTML += `
+        <p><strong>Passengers:</strong></p>
+        <ul>
+          <li>Adults: ${adults}</li>
+          <li>Children: ${children}</li>
+          <li>Infants: ${infants}</li>
+          <li>Total Passengers: ${adults + children + infants}</li>
+        </ul>
+      `;
+
+      bookingDetails.innerHTML = detailsHTML;
+      bookingDetails.classList.add("visible");
+    }
+  });
+
+  // Real-time validation
+  document.getElementById("origin").addEventListener("input", function (e) {
+    const error = document.getElementById("originError");
+    if (validateCity(e.target.value)) {
+      error.classList.remove("error-visible");
+    }
+  });
+
+  document
+    .getElementById("destination")
+    .addEventListener("input", function (e) {
+      const error = document.getElementById("destinationError");
+      if (validateCity(e.target.value)) {
+        error.classList.remove("error-visible");
+      }
+    });
+
+  document
+    .getElementById("departDate")
+    .addEventListener("change", function (e) {
+      const error = document.getElementById("departDateError");
+      if (validateDate(e.target.value)) {
+        error.classList.remove("error-visible");
+      }
+    });
+
+  document
+    .getElementById("returnDate")
+    .addEventListener("change", function (e) {
+      const error = document.getElementById("returnDateError");
+      if (validateDate(e.target.value)) {
+        error.classList.remove("error-visible");
+      }
+    });
+}
+
 // Initialize everything when the document is loaded
 document.addEventListener("DOMContentLoaded", () => {
   initColorOptions();
   initFontSizeControl();
   initContactForm(); // This will only initialize if the form exists
+  initStaysForm();
+  initFlightForm();
 });

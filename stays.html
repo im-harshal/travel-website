@@ -1,83 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TravelDeals - Book Your Stay</title>
-  <link rel="stylesheet" href="mystyle3.css">
-</head>
-<body>
-  <header>
-    <h1>TravelDeals - Book Your Stay</h1>
-    <span id="datetime"></span>
-  </header>
-  <div class="navbar">
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="stays.html">Stays</a></li>
-        <li><a href="flights.html">Flights</a></li>
-        <li><a href="cars.html">Cars</a></li>
-        <li><a href="cruises.html">Cruises</a></li>
-        <li><a href="contact-us.html">Contact Us</a></li>
-      </ul>
-    </nav>
-  </div>
-  <div class="main-div">
-    <!-- Sidebar for Display Settings -->
-    <div class="sidebar">
-      <div class="theme-controls">
-        <h2>Display Settings</h2>
-        
-        <!-- Font Size Controls -->
-        <div class="control-group">
-          <label>Font Size: <span id="fontSizeDisplay">16</span>px</label>
-          <div class="font-size-controls">
-            <button class="btn" onclick="changeFontSize(-2)">-</button>
-            <input type="range" id="fontSizeSlider" min="12" max="24" value="16" />
-            <button class="btn" onclick="changeFontSize(2)">+</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelDeals - Book Your Stay</title>
+    <link rel="stylesheet" href="mystyle.css" />
+  </head>
+  <body>
+    <header>
+      <h1>TravelDeals - Book Your Stay</h1>
+      <span id="datetime"></span>
+    </header>
+    <div class="navbar">
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="stays.html">Stays</a></li>
+          <li><a href="flights.html">Flights</a></li>
+          <li><a href="cars.html">Cars</a></li>
+          <li><a href="cruises.html">Cruises</a></li>
+          <li><a href="contact-us.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="main-div">
+      <!-- Sidebar for Display Settings -->
+      <div class="sidebar">
+        <div class="theme-controls">
+          <h2>Display Settings</h2>
+          <!-- Font Size Controls -->
+          <div class="control-group">
+            <label>Font Size: <span id="fontSizeDisplay">16</span>px</label>
+            <div class="font-size-controls">
+              <button class="btn" onclick="changeFontSize(-2)">-</button>
+              <input
+                type="range"
+                id="fontSizeSlider"
+                min="12"
+                max="24"
+                value="16"
+              />
+              <button class="btn" onclick="changeFontSize(2)">+</button>
+            </div>
+          </div>
+
+          <!-- Background Color Controls -->
+          <div class="control-group">
+            <label>Background Color</label>
+            <div class="color-options" id="colorOptions">
+              <!-- Color buttons will be added by JavaScript -->
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Background Color Controls -->
-        <div class="control-group">
-          <label>Background Color</label>
-          <div class="color-options" id="colorOptions"></div>
+      <!-- Main Content for Stay Booking -->
+      <div class="main-content">
+        <div class="form-container">
+          <h2 class="form-title">Find Your Stay</h2>
+          <form id="staysForm" novalidate>
+            <div class="form-group">
+              <label for="city">City:</label>
+              <input type="text" id="city" name="city" required />
+              <div id="cityError" class="error">
+                Please select a city in Texas or California
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="checkIn">Check-in Date:</label>
+              <input type="date" id="checkIn" name="checkIn" required />
+              <div id="checkInError" class="error">
+                Check-in date must be between September 1, 2024 and December 1,
+                2024
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="checkOut">Check-out Date:</label>
+              <input type="date" id="checkOut" name="checkOut" required />
+              <div id="checkOutError" class="error">
+                Check-out date must be between September 1, 2024 and December 1,
+                2024
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="adults">Number of Adults:</label>
+              <input
+                type="number"
+                id="adults"
+                name="adults"
+                min="1"
+                value="1"
+                required
+              />
+              <div id="adultsError" class="error">
+                Maximum 2 adults per room
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="children">Number of Children:</label>
+              <input
+                type="number"
+                id="children"
+                name="children"
+                min="0"
+                value="0"
+              />
+              <div id="childrenError" class="error">
+                Maximum 2 children per room (not counting infants)
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="infants">Number of Infants:</label>
+              <input
+                type="number"
+                id="infants"
+                name="infants"
+                min="0"
+                value="0"
+              />
+              <div id="infantsError" class="error">
+                Please enter a valid number of infants
+              </div>
+            </div>
+
+            <button type="submit">Search Stays</button>
+
+            <div id="bookingDetails" class="booking-details"></div>
+          </form>
         </div>
       </div>
     </div>
-
-    <!-- Main Content for Stay Booking -->
-    <div class="main-content">
-      <h2>Book Your Stay</h2>
-      <form id="stayForm">
-        <label>City: (Ex: Austin or San Diego)</label>
-        <input type="text" id="city" placeholder="Enter city in Texas or California">
-
-        <!-- Check-in and Check-out Dates -->
-        <label>Check-in Date:</label>
-        <input type="date" id="checkInDate">
-
-        <label>Check-out Date:</label>
-        <input type="date" id="checkOutDate">
-
-        <!-- Guest Selection -->
-        <div>
-          <label>Adults:</label>
-          <input type="number" id="adults" min="1" max="10" value="1">
-          <label>Children:</label>
-          <input type="number" id="children" min="0" max="10" value="0">
-          <label>Infants:</label>
-          <input type="number" id="infants" min="0" max="10" value="0">
-        </div>
-
-        <!-- Search Button -->
-        <button type="button" onclick="validateAndSearchStay()">Search</button>
-      </form>
-      <div id="stayResult"></div>
-    </div>
-  </div>
-  <footer>CS 6314 Web Programming Languages | Group1©2024</footer>
-  <script src="script3.js"></script>
-</body>
+    <footer>CS 6314 Web Programming Languages | Group1©2024</footer>
+    <script src="script.js"></script>
+  </body>
 </html>
