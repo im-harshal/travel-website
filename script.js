@@ -101,6 +101,107 @@ function changeBackgroundColor(color) {
   }
 }
 
+/**varsha's function for cars */
+function submitCarForm() {
+  // Get input values
+  const city = document.getElementById("city").value.trim();
+  const carType = document.getElementById("carType").value;
+  const checkInDate = document.getElementById("checkInDate").value;
+  const checkOutDate = document.getElementById("checkOutDate").value;
+  const outputDiv = document.getElementById("output");
+  
+  // Validate empty fields
+  if (!city || !carType || !checkInDate || !checkOutDate) {
+    alert("All fields are required.");
+    return;
+  }
+
+
+  // Validate date range
+  const startDate = new Date("2024-09-01");
+  const endDate = new Date("2024-12-01");
+  const checkIn = new Date(checkInDate);
+  const checkOut = new Date(checkOutDate);
+
+  if (checkIn < startDate || checkIn > endDate || checkOut < startDate || checkOut > endDate) {
+    alert("Dates must be between September 1, 2024, and December 1, 2024.");
+    return;
+  }
+
+  if (checkOut <= checkIn) {
+    alert("Check-out date must be after the check-in date.");
+    return;
+  }
+
+  // Display entered information
+  outputDiv.innerHTML = `
+    <h3>Booking Details:</h3>
+    <p><strong>City:</strong> ${city}</p>
+    <p><strong>Car Type:</strong> ${carType}</p>
+    <p><strong>Check-In Date:</strong> ${checkInDate}</p>
+    <p><strong>Check-Out Date:</strong> ${checkOutDate}</p>
+  `;
+}
+
+function validateForm() {
+  // Get form values
+  const destination = $("#destination").val().trim();
+  const departingStartDate = $("#departingStartDate").val();
+  const departingEndDate = $("#departingEndDate").val();
+  const minDuration = parseInt($("#minDuration").val());
+  const maxDuration = parseInt($("#maxDuration").val());
+  const guests = parseInt($("#guests").val());
+  const outputDiv = $("#output");
+
+  // Valid destinations
+  const validDestinations = ["Alaska", "Bahamas", "Europe", "Mexico"];
+  
+  // Date range for departing dates
+  const minDate = new Date("2024-09-01");
+  const maxDate = new Date("2024-12-01");
+  const startDate = new Date(departingStartDate);
+  const endDate = new Date(departingEndDate);
+
+  // Validation checks
+  if (!validDestinations.includes(destination)) {
+    alert("Destination must be one of the following: Alaska, Bahamas, Europe, or Mexico.");
+    return;
+  }
+  if (isNaN(minDuration) || minDuration < 3) {
+    alert("Minimum duration must be at least 3 days.");
+    return;
+  }
+  if (isNaN(maxDuration) || maxDuration > 10) {
+    alert("Maximum duration cannot exceed 10 days.");
+    return;
+  }
+  if (minDuration > maxDuration) {
+    alert("Minimum duration cannot be greater than maximum duration.");
+    return;
+  }
+  if (startDate < minDate || startDate > maxDate || endDate < minDate || endDate > maxDate) {
+    alert("Departing dates must be between September 1, 2024, and December 1, 2024.");
+    return;
+  }
+  if (startDate > endDate) {
+    alert("Departing start date cannot be after the departing end date.");
+    return;
+  }
+  if (guests > 2) {
+    alert("Number of guests per room cannot exceed 2, except for infants staying with adults.");
+    return;
+  }
+
+  // Display booking information if all inputs are valid
+  outputDiv.html(`
+    <h3>Booking Details:</h3>
+    <p><strong>Destination:</strong> ${destination}</p>
+    <p><strong>Departing Start Date:</strong> ${departingStartDate}</p>
+    <p><strong>Departing End Date:</strong> ${departingEndDate}</p>
+    <p><strong>Duration:</strong> ${minDuration} - ${maxDuration} days</p>
+    <p><strong>Guests:</strong> ${guests} ${guests > 2 ? '(with infants)' : ''}</p>
+  `);
+}
 /**
  * Contact Form specific functionality
  */
