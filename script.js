@@ -101,6 +101,60 @@ function changeBackgroundColor(color) {
   }
 }
 
+/***
+ *
+ *
+ * XML file related functions
+ *
+ *
+ *
+ */
+// Function to create XML from form data
+function createXMLFromContactForm(formData) {
+  const xmlDoc = document.implementation.createDocument(
+    null,
+    "contactFormData"
+  );
+  const root = xmlDoc.documentElement;
+
+  // Add timestamp
+  const timestamp = xmlDoc.createElement("submissionTime");
+  timestamp.textContent = new Date().toISOString();
+  root.appendChild(timestamp);
+
+  // Add form fields
+  const fields = [
+    "firstName",
+    "lastName",
+    "phone",
+    "gender",
+    "email",
+    "comment",
+  ];
+  fields.forEach((field) => {
+    const element = xmlDoc.createElement(field);
+    element.textContent = formData[field];
+    root.appendChild(element);
+  });
+
+  // Convert XML document to string
+  const serializer = new XMLSerializer();
+  return serializer.serializeToString(xmlDoc);
+}
+
+// Function to download XML file
+function downloadXML(xmlString, filename) {
+  const blob = new Blob([xmlString], { type: "application/xml" });
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(url);
+}
+
 /**varsha's function for cars */
 function submitCarForm() {
   // Get input values
@@ -318,6 +372,21 @@ function initContactForm() {
     }
 
     if (isValid) {
+      // Collect form data
+      const formData = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        phone: document.getElementById("phone").value,
+        gender: document.querySelector('input[name="gender"]:checked').value,
+        email: document.getElementById("email").value,
+        comment: document.getElementById("comment").value,
+      };
+
+      // Create XML and download
+      const xmlString = createXMLFromContactForm(formData);
+      const filename = `contact_form_${new Date().getTime()}.xml`;
+      downloadXML(xmlString, filename);
+
       alert("Form submitted successfully!");
       this.reset();
     }
