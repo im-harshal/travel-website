@@ -69,9 +69,6 @@ nav ul li a {
   margin: auto;
   background-color: #9a8c98;
 }
-.heading {
-  margin-left: 30px;
-}
 .main-content {
   display: flex;
   width: 80%;

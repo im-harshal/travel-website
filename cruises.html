@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TravelDeals - Cruise Booking</title>
+    <title>TravelDeals</title>
     <link rel="stylesheet" href="mystyle.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <header>
-      <h1>TravelDeals - Find Your Perfect Trip</h1>
+      <h1>TravelDeals - Plan Your Perfect Trip</h1>
       <span id="datetime"></span>
     </header>
     <div class="navbar">
@@ -54,37 +54,62 @@
         </div>
       </div>
       <div class="main-content">
-        <h2 class=" heading">Cruise Booking</h2>
-        <form id="cruiseForm">
-          <div class="form-group">
-            <label for="destination">Destination:</label>
-            <input type="text" id="destination" name="destination" required />
-          </div>
-          <div class="form-group">
-            <label for="departingStartDate">Departing Start Date:</label>
-            <input type="date" id="departingStartDate" name="departingStartDate" required />
-          </div>
-          <div class="form-group">
-            <label for="departingEndDate">Departing End Date:</label>
-            <input type="date" id="departingEndDate" name="departingEndDate" required />
-          </div>
-          <div class="form-group">
-            <label for="minDuration">Duration (Min Days):</label>
-            <input type="number" id="minDuration" name="minDuration" required />
-          </div>
-          <div class="form-group">
-            <label for="maxDuration">Duration (Max Days):</label>
-            <input type="number" id="maxDuration" name="maxDuration" required />
-          </div>
-          <div class="form-group">
-            <label for="guests">Number of Guests (Max 2 per room, infants with adults allowed):</label>
-            <input type="number" id="guests" name="guests" required />
-          </div>
-          <button type="button" onclick="validateForm()">Submit</button>
-        </form>
-        
-        <!-- Output container for form data or errors -->
-        <div id="output" class="output"></div>
+        <div class="form-container">
+          <h2 class="form-title">Cruise Booking</h2>
+          <form id="cruiseForm">
+            <div class="form-group">
+              <label for="destination">Destination:</label>
+              <input type="text" id="destination" name="destination" required />
+            </div>
+            <div class="form-group">
+              <label for="departingStartDate">Departing Start Date:</label>
+              <input
+                type="date"
+                id="departingStartDate"
+                name="departingStartDate"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="departingEndDate">Departing End Date:</label>
+              <input
+                type="date"
+                id="departingEndDate"
+                name="departingEndDate"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="minDuration">Duration (Min Days):</label>
+              <input
+                type="number"
+                id="minDuration"
+                name="minDuration"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="maxDuration">Duration (Max Days):</label>
+              <input
+                type="number"
+                id="maxDuration"
+                name="maxDuration"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="guests"
+                >Number of Guests (Max 2 per room, infants with adults
+                allowed):</label
+              >
+              <input type="number" id="guests" name="guests" required />
+            </div>
+            <button type="button" onclick="validateForm()">Submit</button>
+          </form>
+
+          <!-- Output container for form data or errors -->
+          <div id="output" class="output"></div>
+        </div>
       </div>
     </div>
     <footer>CS 6314 Web Programming Languages | Group1©2024</footer>
