@@ -1,99 +1,290 @@
-/* General Styling */
+/*
+Color scheme
+Light Beige: #F5E6D3
+Warm Gray: #9A8C98
+Soft White: #FAF9F6
+Deep Taupe: #4A4E69
+Muted Teal (accent): #22577A
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+/*----------------------Body-----------------------*/
 body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-  }
-  
-  header {
-    text-align: center;
-    color: #4a4e69;
-  }
-  
-  .navbar {
-    background-color: #4a4e69;
-    height: 50px;
-    display: flex;
-    align-items: center;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    display: flex;
-    padding-left: 10px;
-  }
-  
-  nav ul li a {
-    text-decoration: none;
-    padding: 10px;
-    color: #faf9f6;
-  }
-  
-  .main-div {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .sidebar {
-    width: 20%;
-    background-color: #9a8c98;
-    padding: 15px;
-    box-sizing: border-box;
-  }
-  
-  .theme-controls h2 {
-    color: #faf9f6;
-  }
-  
-  .main-content {
-    width: 80%;
-    padding: 20px;
-    background-color: #faf9f6;
-  }
-  
-  label {
-    display: block;
-    margin-top: 10px;
-  }
-  
-  input[type="text"],
-  input[type="date"],
-  input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-  }
-  
-  button {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #4a4e69;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #6a6e79;
-  }
-  .color-btn {
-    padding: 10px;
-    border: 2px solid transparent;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #000; /* Ensure text is visible on light backgrounds */
-  }
-  
-  #errorMessage {
-    color: red;
-    font-size: 1rem;
-  }
-  
-  footer {
-    text-align: center;
-    margin-top: 20px;
-    color: #22577a;
-  }
-  
+  margin: 0;
+  height: auto;
+  font-family: "Roboto", sans-serif;
+}
+/*------------------Header CSS--------------------*/
+header {
+  text-align: center;
+  color: #4a4e69;
+}
+
+header h1 {
+  margin: 0;
+  padding: 5px 0;
+}
+
+header #datetime {
+  padding: 0;
+  margin: 0;
+}
+/*--------------------Navbar CSS-----------------*/
+.navbar {
+  background-color: #4a4e69;
+  height: 50px;
+  margin: 10px 0 0 0;
+  display: flex;
+  align-items: center;
+}
+nav {
+  width: auto;
+  height: auto;
+}
+nav ul {
+  padding-top: 5px;
+  list-style-type: none;
+  display: flex;
+  padding-left: 10px;
+}
+nav ul li {
+  margin-right: 10px;
+}
+nav ul li a {
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  color: #faf9f6;
+}
+
+/*---------------Main Content CSS--------------*/
+.main-div {
+  display: flex;
+}
+.sidebar {
+  display: flex;
+  width: 20%;
+  height: 1200px;
+  margin: auto;
+  background-color: #9a8c98;
+}
+
+.main-content {
+  display: flex;
+  width: 80%;
+  height: 1200px;
+  margin: auto;
+  background-color: #faf9f6;
+}
+
+/*----------------Footer CSS-------------------*/
+footer {
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  height: 30px;
+  color: #22577a;
+}
+
+/*
+
+Background color and font change common for all html pages
+Theme Controls Styles
+
+*/
+
+.theme-controls {
+  width: 100%;
+  padding: 15px;
+}
+
+.theme-controls h2 {
+  color: #faf9f6;
+}
+.control-group {
+  margin-bottom: 20px;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #faf9f6;
+}
+
+.font-size-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  padding: 5px 10px;
+  background-color: #4a4e69;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #e0e0e0;
+}
+
+.color-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.color-btn {
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #000; /* Ensure text is visible on light backgrounds */
+}
+
+.color-btn.selected {
+  border-color: #0066cc;
+}
+
+/* 
+
+CSS related to various html pages 
+
+*/
+
+/*-----------------Index page----------------*/
+.main-text {
+  padding: 40px;
+  text-align: justify;
+}
+
+/*---------------Contact Us page------------*/
+.form-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.form-title {
+  text-align: center;
+  color: #4a4e69;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #4a4e69;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+.radio-group {
+  margin: 0.5rem 0;
+}
+
+.radio-group label {
+  display: inline;
+  margin-right: 1.5rem;
+  font-weight: normal;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+button {
+  background-color: #4a4e69;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #4a4e79;
+}
+
+.error-visible {
+  display: block;
+}
+
+/* Additional Stays Form Styling */
+.stay-form-container {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #4a4e69;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #4a4e69;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #6a6e79;
+}
+
+#errorMessage {
+  color: red;
+  font-size: 1rem;
+}

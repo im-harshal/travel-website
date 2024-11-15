@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TravelDeals - Book Your Stay</title>
-  <link rel="stylesheet" href="mystyle3.css">
+  <link rel="stylesheet" href="mystyle.css" />
 </head>
 <body>
   <header>
@@ -24,11 +24,9 @@
     </nav>
   </div>
   <div class="main-div">
-    <!-- Sidebar for Display Settings -->
     <div class="sidebar">
       <div class="theme-controls">
         <h2>Display Settings</h2>
-        
         <!-- Font Size Controls -->
         <div class="control-group">
           <label>Font Size: <span id="fontSizeDisplay">16</span>px</label>
@@ -38,7 +36,6 @@
             <button class="btn" onclick="changeFontSize(2)">+</button>
           </div>
         </div>
-
         <!-- Background Color Controls -->
         <div class="control-group">
           <label>Background Color</label>
@@ -46,38 +43,40 @@
         </div>
       </div>
     </div>
-
     <!-- Main Content for Stay Booking -->
     <div class="main-content">
       <h2>Book Your Stay</h2>
-      <form id="stayForm">
-        <label>City: (Ex: Austin or San Diego)</label>
-        <input type="text" id="city" placeholder="Enter city in Texas or California">
+      <div class="stay-form-container">
+        <form id="stayForm">
+          <label>City:</label>
+          <input type="text" id="city" placeholder="Enter city in Texas or California" />
 
-        <!-- Check-in and Check-out Dates -->
-        <label>Check-in Date:</label>
-        <input type="date" id="checkInDate">
+          <!-- Check-in and Check-out Dates -->
+          <label>Check-in Date:</label>
+          <input type="date" id="checkInDate" />
 
-        <label>Check-out Date:</label>
-        <input type="date" id="checkOutDate">
+          <label>Check-out Date:</label>
+          <input type="date" id="checkOutDate" />
 
-        <!-- Guest Selection -->
-        <div>
-          <label>Adults:</label>
-          <input type="number" id="adults" min="1" max="10" value="1">
-          <label>Children:</label>
-          <input type="number" id="children" min="0" max="10" value="0">
-          <label>Infants:</label>
-          <input type="number" id="infants" min="0" max="10" value="0">
-        </div>
+          <!-- Guest Selection -->
+          <div>
+            <label>Adults:</label>
+            <input type="number" id="adults" min="1" max="10" value="1" />
+            <label>Children:</label>
+            <input type="number" id="children" min="0" max="10" value="0" />
+            <label>Infants:</label>
+            <input type="number" id="infants" min="0" max="10" value="0" />
+          </div>
 
-        <!-- Search Button -->
-        <button type="button" onclick="validateAndSearchStay()">Search</button>
-      </form>
+          <!-- Search Button -->
+          <button type="button" onclick="validateAndSearchStay()">Search</button>
+        </form>
+      </div>
       <div id="stayResult"></div>
     </div>
   </div>
   <footer>CS 6314 Web Programming Languages | Group1©2024</footer>
-  <script src="script3.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
+
