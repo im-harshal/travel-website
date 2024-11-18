@@ -59,7 +59,7 @@
       <div class="main-content">
         <div class="form-container">
           <h2 class="form-title">Find Your Stay</h2>
-          <form id="staysForm" novalidate>
+          <form id="staysForm">
             <div class="form-group">
               <label for="city">City:</label>
               <input type="text" id="city" name="city" required />
@@ -67,25 +67,23 @@
                 Please select a city in Texas or California
               </div>
             </div>
-
+          
             <div class="form-group">
               <label for="checkIn">Check-in Date:</label>
-              <input type="date" id="checkIn" name="checkIn" required />
+              <input type="date" id="checkIn" name="check_in" required />
               <div id="checkInError" class="error">
-                Check-in date must be between September 1, 2024 and December 1,
-                2024
+                Check-in date must be between September 1, 2024, and December 1, 2024
               </div>
             </div>
-
+          
             <div class="form-group">
               <label for="checkOut">Check-out Date:</label>
-              <input type="date" id="checkOut" name="checkOut" required />
+              <input type="date" id="checkOut" name="check_out" required />
               <div id="checkOutError" class="error">
-                Check-out date must be between September 1, 2024 and December 1,
-                2024
+                Check-out date must be between September 1, 2024, and December 1, 2024
               </div>
             </div>
-
+          
             <div class="form-group">
               <label for="adults">Number of Adults:</label>
               <input
@@ -100,7 +98,7 @@
                 Maximum 2 adults per room
               </div>
             </div>
-
+          
             <div class="form-group">
               <label for="children">Number of Children:</label>
               <input
@@ -114,7 +112,7 @@
                 Maximum 2 children per room (not counting infants)
               </div>
             </div>
-
+          
             <div class="form-group">
               <label for="infants">Number of Infants:</label>
               <input
@@ -128,11 +126,10 @@
                 Please enter a valid number of infants
               </div>
             </div>
-
+          
             <button type="submit">Search Stays</button>
-
-            <div id="bookingDetails" class="booking-details"></div>
           </form>
+          <div id="bookingDetails" class="booking-details"></div>
         </div>
       </div>
     </div>

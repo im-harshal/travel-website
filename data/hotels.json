@@ -1,0 +1,18 @@
+[
+  {
+      "hotel_id": 1,
+      "hotel_name": "Grand Texas Hotel",
+      "city": "Austin",
+      "rooms": 20,
+      "price_per_night": 150,
+      "available_dates": ["2024-09-01", "2024-12-01"]
+  },
+  {
+      "hotel_id": 2,
+      "hotel_name": "Sunny California Inn",
+      "city": "San Diego",
+      "rooms": 15,
+      "price_per_night": 200,
+      "available_dates": ["2024-09-01", "2024-12-01"]
+  }
+]

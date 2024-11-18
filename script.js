@@ -393,6 +393,37 @@ function initContactForm() {
     }
   });
 }
+function initbook() {
+  const bookForm = document.getElementById("bookForm");
+  if (!bookForm) return;
+
+  bookForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Gather form data
+    const formData = new FormData(bookForm);
+
+    // Send data to book.php
+    fetch("book.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Expecting JSON response from book.php
+      })
+      .then((data) => {
+        // Redirect to cart.html with booking details as query parameters
+        const queryString = new URLSearchParams(data).toString();
+        window.location.href = `cart.html?${queryString}`;
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  });
+}
 
 function initStaysForm() {
   const staysForm = document.getElementById("staysForm");
@@ -400,18 +431,16 @@ function initStaysForm() {
 
   // Valid cities in Texas and California
   const validCities = [
-    // Texas cities
     "austin",
     "houston",
     "dallas",
     "san antonio",
-    "fort worth",
-    // California cities
+    "fort worth", // Texas
     "los angeles",
     "san francisco",
     "san diego",
     "sacramento",
-    "san jose",
+    "san jose", // California
   ];
 
   // Date range constraints
@@ -489,29 +518,28 @@ function initStaysForm() {
     }
 
     if (isValid) {
-      // Calculate required rooms
-      const requiredRooms = calculateRequiredRooms(adults, children);
+      // All validations passed. Submit data to the PHP backend via fetch()
+      const formData = new FormData(staysForm);
 
-      // Display booking details
-      const bookingDetails = document.getElementById("bookingDetails");
-      bookingDetails.innerHTML = `
-        <h3>Booking Details:</h3>
-        <p><strong>City:</strong> ${
-          city.charAt(0).toUpperCase() + city.slice(1)
-        }</p>
-        <p><strong>Check-in Date:</strong> ${checkIn}</p>
-        <p><strong>Check-out Date:</strong> ${checkOut}</p>
-        <p><strong>Number of Guests:</strong></p>
-        <ul>
-          <li>Adults: ${adults}</li>
-          <li>Children: ${children}</li>
-          <li>Infants: ${infants}</li>
-        </ul>
-        <div class="rooms-info">
-          <p><strong>Required Rooms:</strong> ${requiredRooms}</p>
-        </div>
-      `;
-      bookingDetails.classList.add("visible");
+      fetch("stays/search.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.text(); // Expecting HTML response from PHP
+        })
+        .then((data) => {
+          // Display PHP backend response
+          const bookingDetails = document.getElementById("bookingDetails");
+          bookingDetails.innerHTML = data;
+          bookingDetails.classList.add("visible");
+        })
+        .catch((error) => {
+          console.error("There was a problem with the fetch operation:", error);
+        });
     }
   });
 
@@ -772,4 +800,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactForm(); // This will only initialize if the form exists
   initStaysForm();
   initFlightForm();
+  initbook();
 });
