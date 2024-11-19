@@ -98,6 +98,37 @@
             </div>
           </section>
         </div>
+        <div class="cart-container">
+          <h1>Your Booking</h1>
+          <p><strong>Hotel:</strong> <span id="hotelName"></span></p>
+          <p><strong>Check-in Date:</strong> <span id="checkIn"></span></p>
+          <p><strong>Check-out Date:</strong> <span id="checkOut"></span></p>
+          <p><strong>Guests:</strong></p>
+          <ul>
+            <li>Adults: <span id="adults"></span></li>
+            <li>Children: <span id="children"></span></li>
+            <li>Infants: <span id="infants"></span></li>
+          </ul>
+          <p><strong>Total Price:</strong> $<span id="totalPrice"></span></p>
+        </div>
+
+        <script>
+          const urlParams = new URLSearchParams(window.location.search);
+          document.getElementById("hotelName").textContent =
+            urlParams.get("hotel_name");
+          document.getElementById("checkIn").textContent =
+            urlParams.get("check_in");
+          document.getElementById("checkOut").textContent =
+            urlParams.get("check_out");
+          document.getElementById("adults").textContent =
+            urlParams.get("adults");
+          document.getElementById("children").textContent =
+            urlParams.get("children");
+          document.getElementById("infants").textContent =
+            urlParams.get("infants");
+          document.getElementById("totalPrice").textContent =
+            urlParams.get("total_price");
+        </script>
       </div>
     </div>
 

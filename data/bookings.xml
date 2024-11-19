@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookings>
+  <booking>
+    <hotel_id>1</hotel_id>
+    <check_in>2024-11-19</check_in>
+    <check_out>2024-11-22</check_out>
+    <adults>2</adults>
+    <children>1</children>
+    <infants>1</infants>
+    <total_price>450</total_price>
+  </booking>
+  <booking>
+    <hotel_id>1</hotel_id>
+    <check_in>2024-11-18</check_in>
+    <check_out>2024-11-23</check_out>
+    <adults>2</adults>
+    <children>1</children>
+    <infants>1</infants>
+    <total_price>750</total_price>
+  </booking>
+  <booking>
+    <hotel_name>Grand Texas Hotel</hotel_name>
+    <city>Austin</city>
+    <check_in>2024-11-20</check_in>
+    <check_out>2024-11-25</check_out>
+    <adults>2</adults>
+    <children>0</children>
+    <infants>0</infants>
+    <total_price>750</total_price>
+  </booking>
+</bookings>
