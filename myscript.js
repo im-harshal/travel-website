@@ -1,23 +1,131 @@
+/**
+ * Date and Time Javascript
+ */
+function updateDateTime() {
+  var now = new Date();
+  var dateTimeString = now.toLocaleString(undefined, {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+  document.getElementById("datetime").textContent = dateTimeString;
+}
+
+// Update the date and time immediately
+updateDateTime();
+
+// Update the date and time every minute (60000 milliseconds)
+setInterval(updateDateTime, 60000);
+
+/**
+ * Background color and font change common for all html pages
+ */
+// Color options configuration
+const colors = [
+  { label: "Light Beige", value: "#F5E6D3" },
+  { label: "Light Blue", value: "#D8E5F7" },
+  { label: "Soft White", value: "#FAF9F6" },
+  { label: "Light Green", value: "#E0F0E3" },
+  { label: "Beige", value: "#f5f5dc" },
+];
+
+// Initialize color options
+function initColorOptions() {
+  const colorOptionsContainer = document.getElementById("colorOptions");
+  if (colorOptionsContainer) {
+    colors.forEach((color) => {
+      const button = document.createElement("button");
+      button.className = "color-btn";
+      button.style.backgroundColor = color.value;
+      button.textContent = color.label;
+      button.onclick = () => changeBackgroundColor(color.value);
+      colorOptionsContainer.appendChild(button);
+    });
+  }
+}
+
+// Font size control
+let currentFontSize = 16;
+
+function initFontSizeControl() {
+  const fontSizeSlider = document.getElementById("fontSizeSlider");
+  const fontSizeDisplay = document.getElementById("fontSizeDisplay");
+
+  if (fontSizeSlider) {
+    fontSizeSlider.addEventListener("input", (e) => {
+      const newSize = parseInt(e.target.value);
+      updateFontSize(newSize);
+    });
+  }
+}
+
+function changeFontSize(delta) {
+  const newSize = Math.min(Math.max(currentFontSize + delta, 12), 24);
+  const slider = document.getElementById("fontSizeSlider");
+  if (slider) {
+    slider.value = newSize;
+    updateFontSize(newSize);
+  }
+}
+
+function updateFontSize(size) {
+  currentFontSize = size;
+  const display = document.getElementById("fontSizeDisplay");
+  if (display) {
+    display.textContent = size;
+  }
+  const mainDiv = document.querySelector(".main-div");
+  if (mainDiv) {
+    mainDiv.style.fontSize = `${size}px`;
+  }
+}
+
+// Background color control
+function changeBackgroundColor(color) {
+  const mainContent = document.querySelector(".main-content");
+  if (mainContent) {
+    mainContent.style.backgroundColor = color;
+
+    // Update selected state of color buttons
+    const buttons = document.querySelectorAll(".color-btn");
+    buttons.forEach((button) => {
+      if (button.style.backgroundColor === color) {
+        button.classList.add("selected");
+      } else {
+        button.classList.remove("selected");
+      }
+    });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  initColorOptions();
   // Toggle visibility of the return date based on the selected trip type
   const tripTypeRadios = document.getElementsByName("tripType");
   const returnDateField = document.getElementById("returnDateField");
 
   tripTypeRadios.forEach((radio) => {
-      radio.addEventListener("change", () => {
-          if (document.getElementById("roundTrip").checked) {
-              returnDateField.style.display = "block";
-          } else {
-              returnDateField.style.display = "none";
-          }
-      });
+    radio.addEventListener("change", () => {
+      if (document.getElementById("roundTrip").checked) {
+        returnDateField.style.display = "block";
+      } else {
+        returnDateField.style.display = "none";
+      }
+    });
   });
 
   // Handle the flight search form submission
-  document.getElementById("flightSearchForm").addEventListener("submit", async function (event) {
+  document
+    .getElementById("flightSearchForm")
+    .addEventListener("submit", async function (event) {
       event.preventDefault(); // Prevent the default form submission
 
-      const tripType = document.querySelector("input[name='tripType']:checked").value;
+      const tripType = document.querySelector(
+        "input[name='tripType']:checked"
+      ).value;
       const origin = document.getElementById("origin").value;
       const destination = document.getElementById("destination").value;
       const departureDate = document.getElementById("departureDate").value;
@@ -46,32 +154,32 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("destination", destination);
       localStorage.setItem("departureDate", departureDate);
       if (tripType === "roundTrip") {
-          localStorage.setItem("returnDate", returnDate);
+        localStorage.setItem("returnDate", returnDate);
       }
 
       try {
-          // Send a POST request to flight.php
-          const response = await fetch("flight.php", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                  origin,
-                  destination,
-                  date: departureDate,
-                  returnDate: tripType === "roundTrip" ? returnDate : null,
-                  passengers: totalPassengers,
-              }),
-          });
+        // Send a POST request to flight.php
+        const response = await fetch("flight.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            origin,
+            destination,
+            date: departureDate,
+            returnDate: tripType === "roundTrip" ? returnDate : null,
+            passengers: totalPassengers,
+          }),
+        });
 
-          const flightData = await response.json();
+        const flightData = await response.json();
 
-          // Dynamically display results
-          displayResults(tripType, flightData.departure, flightData.return);
+        // Dynamically display results
+        displayResults(tripType, flightData.departure, flightData.return);
       } catch (error) {
-          console.error("Error fetching flights:", error);
-          alert("Failed to fetch flights. Please try again.");
+        console.error("Error fetching flights:", error);
+        alert("Failed to fetch flights. Please try again.");
       }
-  });
+    });
 });
 
 // Function to dynamically display flight search results
@@ -81,28 +189,28 @@ function displayResults(tripType, departureFlights, returnFlights) {
 
   // Display departure flights
   if (departureFlights && departureFlights.length > 0) {
-      const departureSection = document.createElement("div");
-      departureSection.innerHTML = "<h3>Departing Flights</h3>";
-      departureFlights.forEach((flight) => {
-          const flightDiv = createFlightCard(flight, true);
-          departureSection.appendChild(flightDiv);
-      });
-      resultsContainer.appendChild(departureSection);
+    const departureSection = document.createElement("div");
+    departureSection.innerHTML = "<h3>Departing Flights</h3>";
+    departureFlights.forEach((flight) => {
+      const flightDiv = createFlightCard(flight, true);
+      departureSection.appendChild(flightDiv);
+    });
+    resultsContainer.appendChild(departureSection);
   } else {
-      resultsContainer.innerHTML += "<p>No departing flights available.</p>";
+    resultsContainer.innerHTML += "<p>No departing flights available.</p>";
   }
 
   // Display return flights for Round-Trips
   if (tripType === "roundTrip" && returnFlights && returnFlights.length > 0) {
-      const returnSection = document.createElement("div");
-      returnSection.innerHTML = "<h3>Returning Flights</h3>";
-      returnFlights.forEach((flight) => {
-          const flightDiv = createFlightCard(flight, false);
-          returnSection.appendChild(flightDiv);
-      });
-      resultsContainer.appendChild(returnSection);
+    const returnSection = document.createElement("div");
+    returnSection.innerHTML = "<h3>Returning Flights</h3>";
+    returnFlights.forEach((flight) => {
+      const flightDiv = createFlightCard(flight, false);
+      returnSection.appendChild(flightDiv);
+    });
+    resultsContainer.appendChild(returnSection);
   } else if (tripType === "roundTrip") {
-      resultsContainer.innerHTML += "<p>No returning flights available.</p>";
+    resultsContainer.innerHTML += "<p>No returning flights available.</p>";
   }
 }
 
@@ -125,18 +233,18 @@ function createFlightCard(flight, isDeparting) {
 
   const addToCartButton = document.createElement("button");
   addToCartButton.textContent = isDeparting
-      ? "Add as Departing Flight"
-      : "Add as Returning Flight";
+    ? "Add as Departing Flight"
+    : "Add as Returning Flight";
   addToCartButton.addEventListener("click", () => {
-      addToCart(flight, isDeparting);
+    addToCart(flight, isDeparting);
   });
 
   const removeFromCartButton = document.createElement("button");
   removeFromCartButton.textContent = isDeparting
-      ? "Remove Departing Flight"
-      : "Remove Returning Flight";
+    ? "Remove Departing Flight"
+    : "Remove Returning Flight";
   removeFromCartButton.addEventListener("click", () => {
-      removeFromCart(isDeparting);
+    removeFromCart(isDeparting);
   });
 
   flightDiv.appendChild(addToCartButton);

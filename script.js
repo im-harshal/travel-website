@@ -372,23 +372,24 @@ function initContactForm() {
     }
 
     if (isValid) {
-      // Collect form data
-      const formData = {
-        firstName: document.getElementById("firstName").value,
-        lastName: document.getElementById("lastName").value,
-        phone: document.getElementById("phone").value,
-        gender: document.querySelector('input[name="gender"]:checked').value,
-        email: document.getElementById("email").value,
-        comment: document.getElementById("comment").value,
-      };
+      const formData = new FormData(contactForm);
 
-      // Create XML and download
-      const xmlString = createXMLFromContactForm(formData);
-      const filename = `contact_form_${new Date().getTime()}.xml`;
-      downloadXML(xmlString, filename);
-
-      alert("Form submitted successfully!");
-      this.reset();
+      fetch("contact-us.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Form submitted successfully!");
+            contactForm.reset();
+          } else {
+            alert("Error: " + data.message);
+          }
+        })
+        .catch((error) => {
+          alert("An error occurred: " + error.message);
+        });
     }
   });
 }
