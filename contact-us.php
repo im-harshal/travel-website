@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (file_exists($filePath)) {
         $xml = simplexml_load_file($filePath);
     } else {
-        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><conatct-info></contact-info>');
+        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><contact-info></contact-info>');
     }
 
     // Add a new submission

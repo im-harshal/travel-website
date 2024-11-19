@@ -67,19 +67,18 @@ nav ul li a {
 .main-div {
   flex: 1;
   display: flex;
-  height: 100vh;
 }
 .sidebar {
   display: flex;
   width: 20%;
-  height: 100vh;
+  height: auto;
   margin: auto;
   background-color: #9a8c98;
 }
 .main-content {
   display: flex;
   width: 80%;
-  height: 100vh;
+  height: auto;
   margin: auto;
   background-color: #faf9f6;
   flex-direction: row;
@@ -92,7 +91,6 @@ nav ul li a {
 /*----------------Footer CSS-------------------*/
 footer {
   text-align: center;
-  align-items: center;
   margin-top: auto;
   height: 30px;
   color: #22577a;
