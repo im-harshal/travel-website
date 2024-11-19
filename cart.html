@@ -1,61 +1,98 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TravelDeals</title>
-    <link rel="stylesheet" href="mystyle.css" />
-  </head>
-  <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
     <header>
-      <h1>TravelDeals - Plan Your Perfect Trip</h1>
-      <span id="datetime"></span>
+        <h1>TravelDeals - Your Cart</h1>
+        <span id="datetime"></span>
     </header>
-    <div class="navbar">
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="stays.html">Stays</a></li>
-          <li><a href="flights.html">Flights</a></li>
-          <li><a href="cars.html">Cars</a></li>
-          <li><a href="cruises.html">Cruises</a></li>
-          <li><a href="contact-us.html">Contact Us</a></li>
-          <li><a href="cart.html">Cart</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="main-div">
-      <div class="sidebar">
-        <div class="theme-controls">
-          <h2>Display Settings</h2>
-          <!-- Font Size Controls -->
-          <div class="control-group">
-            <label>Font Size: <span id="fontSizeDisplay">16</span>px</label>
-            <div class="font-size-controls">
-              <button class="btn" onclick="changeFontSize(-2)">-</button>
-              <input
-                type="range"
-                id="fontSizeSlider"
-                min="12"
-                max="24"
-                value="16"
-              />
-              <button class="btn" onclick="changeFontSize(2)">+</button>
-            </div>
-          </div>
 
-          <!-- Background Color Controls -->
-          <div class="control-group">
-            <label>Background Color</label>
-            <div class="color-options" id="colorOptions">
-              <!-- Color buttons will be added by JavaScript -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="main-content"></div>
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="stays.html">Stays</a></li>
+                <li><a href="flights.html">Flights</a></li>
+                <li><a href="cars.html">Cars</a></li>
+                <li><a href="cruises.html">Cruises</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
     </div>
+
+    <div class="main-div">
+        <div class="sidebar">
+            <div class="theme-controls">
+                <h2>Display Settings</h2>
+                <div class="control-group">
+                    <label>Font Size: <span id="fontSizeDisplay">16</span>px</label>
+                    <div class="font-size-controls">
+                        <button class="btn" onclick="changeFontSize(-2)">-</button>
+                        <input type="range" id="fontSizeSlider" min="12" max="24" value="16">
+                        <button class="btn" onclick="changeFontSize(2)">+</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Background Color</label>
+                    <div class="color-options" id="colorOptions">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h2>Your Cart</h2>
+
+            <section id="flight-cart" class="cart-section">
+                <h3>Flights</h3>
+
+                <div id="departing-flight">
+                    <h4>Departing Flight</h4>
+                    <div id="departing-flight-details">
+                        <!-- Departing flight details will be displayed here -->
+                    </div>
+                </div>
+
+                <div id="returning-flight" style="display: none;">
+                    <h4>Returning Flight</h4>
+                    <div id="returning-flight-details">
+                        <!-- Returning flight details will be displayed here -->
+                    </div>
+                </div>
+
+                <div id="total-price">
+                    <h4>Total Price</h4>
+                    <p id="price-display">$0.00</p>
+                </div>
+
+                <div id="passenger-details">
+                    <h4>Enter Passenger Details</h4>
+                    <form id="passenger-form">
+                        <div id="passenger-fields">
+                            <!-- Passenger fields will be dynamically added here -->
+                        </div>
+                        <button type="button" id="confirm-booking">Confirm Booking</button>
+                    </form>
+                </div>
+
+                <div id="booking-summary">
+                    <h4>Booking Summary</h4>
+                    <div id="summary-details">
+                        <!-- Booking summary details will be displayed here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
     <footer>CS 6314 Web Programming Languages | Group1©2024</footer>
-    <script src="script.js"></script>
-  </body>
+    <script src="cart.js"></script>
+</body>
 </html>
