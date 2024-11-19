@@ -3,14 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TravelDeals</title>
+    <title>Flight Search</title>
     <link rel="stylesheet" href="mystyle.css" />
   </head>
   <body>
     <header>
-      <h1>TravelDeals - Plan Your Perfect Trip</h1>
+      <h1>TravelDeals - Search Flights</h1>
       <span id="datetime"></span>
     </header>
+
     <div class="navbar">
       <nav>
         <ul>
@@ -24,13 +25,11 @@
         </ul>
       </nav>
     </div>
+
     <div class="main-div">
-      <!-- Sidebar for Display Settings -->
       <div class="sidebar">
         <div class="theme-controls">
           <h2>Display Settings</h2>
-
-          <!-- Font Size Controls -->
           <div class="control-group">
             <label>Font Size: <span id="fontSizeDisplay">16</span>px</label>
             <div class="font-size-controls">
@@ -46,7 +45,6 @@
             </div>
           </div>
 
-          <!-- Background Color Controls -->
           <div class="control-group">
             <label>Background Color</label>
             <div class="color-options" id="colorOptions"></div>
@@ -56,119 +54,71 @@
 
       <div class="main-content">
         <div class="form-container">
-          <h2 class="form-title">Find Your Flight</h2>
-          <form id="flightForm" novalidate>
-            <div class="form-group">
-              <label>Trip Type:</label>
-              <div class="radio-group">
-                <input
-                  type="radio"
-                  id="oneWay"
-                  name="tripType"
-                  value="oneWay"
-                  checked
-                />
-                <label for="oneWay">One Way</label>
-                <input
-                  type="radio"
-                  id="roundTrip"
-                  name="tripType"
-                  value="roundTrip"
-                />
-                <label for="roundTrip">Round Trip</label>
-              </div>
+          <h2>Search Flights</h2>
+          <form id="flightSearchForm">
+            <label for="tripType">Trip Type:</label>
+            <div class="radio-group">
+              <input
+                type="radio"
+                id="oneWay"
+                name="tripType"
+                value="oneWay"
+                checked
+              />
+              <label for="oneWay">One-Way</label>
+              <input
+                type="radio"
+                id="roundTrip"
+                name="tripType"
+                value="roundTrip"
+              />
+              <label for="roundTrip">Round-Trip</label>
             </div>
 
-            <div class="form-group">
-              <label for="origin">Origin:</label>
-              <input type="text" id="origin" name="origin" required />
-              <div id="originError" class="error">
-                Please select a city in Texas or California
-              </div>
-            </div>
+            <label for="origin">Origin:</label>
+            <input
+              type="text"
+              id="origin"
+              placeholder="Enter origin city"
+              required
+            />
 
-            <div class="form-group">
-              <label for="destination">Destination:</label>
-              <input type="text" id="destination" name="destination" required />
-              <div id="destinationError" class="error">
-                Please select a city in Texas or California
-              </div>
-            </div>
+            <label for="destination">Destination:</label>
+            <input
+              type="text"
+              id="destination"
+              placeholder="Enter destination city"
+              required
+            />
 
-            <div class="form-group">
-              <label for="departDate">Departure Date:</label>
-              <input type="date" id="departDate" name="departDate" required />
-              <div id="departDateError" class="error">
-                Date must be between September 1, 2024 and December 1, 2024
-              </div>
-            </div>
+            <label for="departureDate">Departure Date:</label>
+            <input type="date" id="departureDate" required />
 
-            <div class="form-group return-date-group" style="display: none">
+            <div id="returnDateField" style="display: none">
               <label for="returnDate">Return Date:</label>
-              <input type="date" id="returnDate" name="returnDate" />
-              <div id="returnDateError" class="error">
-                Date must be between September 1, 2024 and December 1, 2024
-              </div>
+              <input type="date" id="returnDate" />
             </div>
 
-            <div class="form-group">
-              <label class="passengers-label">
-                <i class="fas fa-user passenger-icon"></i> Passengers
-              </label>
-              <div class="passengers-popup" style="display: none">
-                <div class="passenger-type">
-                  <label for="adults">Adults (12+ years):</label>
-                  <input
-                    type="number"
-                    id="adults"
-                    name="adults"
-                    min="1"
-                    max="4"
-                    value="1"
-                  />
-                  <div id="adultsError" class="error">
-                    Maximum 4 passengers allowed
-                  </div>
-                </div>
-                <div class="passenger-type">
-                  <label for="children">Children (2-11 years):</label>
-                  <input
-                    type="number"
-                    id="children"
-                    name="children"
-                    min="0"
-                    max="4"
-                    value="0"
-                  />
-                  <div id="childrenError" class="error">
-                    Maximum 4 passengers allowed
-                  </div>
-                </div>
-                <div class="passenger-type">
-                  <label for="infants">Infants (under 2):</label>
-                  <input
-                    type="number"
-                    id="infants"
-                    name="infants"
-                    min="0"
-                    max="4"
-                    value="0"
-                  />
-                  <div id="infantsError" class="error">
-                    Maximum 4 passengers allowed
-                  </div>
-                </div>
-              </div>
-            </div>
+            <label for="adults">Adults:</label>
+            <input type="number" id="adults" min="1" value="1" required />
+
+            <label for="children">Children:</label>
+            <input type="number" id="children" min="0" value="0" />
+
+            <label for="infants">Infants:</label>
+            <input type="number" id="infants" min="0" value="0" />
 
             <button type="submit">Search Flights</button>
-
-            <div id="bookingDetails" class="booking-details"></div>
           </form>
+
+          <div id="resultsContainer">
+            <!-- Flight search results will be dynamically added here -->
+          </div>
         </div>
       </div>
     </div>
+
     <footer>CS 6314 Web Programming Languages | Group1©2024</footer>
-    <script src="script.js"></script>
+    <script src="myscript.js"></script>
   </body>
 </html>
